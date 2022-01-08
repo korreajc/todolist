@@ -1,23 +1,24 @@
-function createProject(projectName, task){
+
+
+function createProject(projectName){
     return{
         projectName: projectName,
-        toDoList: [
-
-        ],
-
-        addTask: function(){
-            this.toDoList.push(task)
-        }
     }
 }
 
-function createTask(taskName, description, dueDate, priority){
+function createTask(taskName){
     return{
         taskName: taskName,
-        description: description,
-        dueDate: dueDate,
-        priority: priority
     }
 }
 
-export {createProject, createTask}
+function createListItem(project, tasks){
+    return{
+        projectName: project,
+        tasks: [tasks
+        ]
+    }
+    
+}
+
+export {createProject,  createTask, createListItem}

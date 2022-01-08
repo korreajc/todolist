@@ -1,4 +1,8 @@
-import {createProject} from './project.js'
+import {createProject, createTask, createListItem} from './project.js'
+import {lists} from './array.js'
+import {createContent} from './content.js'
+import {addListeners} from './main.js'
+import {btnMaker, inputForm} from './sharedFunctions.js'
 
 function addProjectToDOM(){
     const projectList = document.getElementById("projectList")
@@ -6,54 +10,48 @@ function addProjectToDOM(){
     project.innerHTML = "Default"
 }
 
-
-
 function inputProjectName(){
-    const list = document.getElementById("projectList")
-    const inputDiv = document.createElement("div");
-    inputDiv.setAttribute("id", "inputForm")
-    const label = document.createElement("Label")
-    const input = document.createElement("input")
-
-    input.setAttribute("type", "text")
-    input.setAttribute("id", "userInput")
-
-    inputDiv.appendChild(label)
-    inputDiv.appendChild(input)
-    list.appendChild(inputDiv)
-    createBtn();
+    inputForm("userInput", "projectList")
+    btnMaker("subBtn", "projectList");
 }
 
-function createBtn(){
-    const inputDiv = document.getElementById("inputForm")
-    const submitBtn = document.createElement("button")
-    submitBtn.setAttribute("id", "subBtn")
-    submitBtn.innerHTML = "submit"
-    inputDiv.appendChild(submitBtn);
-}
+
 
 function add(){
+    //grabbing list and user input
     const list = document.getElementById("projectList")
     const input = document.getElementById("userInput").value
+
+    //creating li and adding attributes and input to it
     const newProj = document.createElement("li")
+    newProj.classList.add("listItem")
     newProj.innerHTML = input;
-
+    let dataIndex = lists.length;
+    newProj.setAttribute("data-index",dataIndex)
+    
+    //appends to dom
     list.appendChild(newProj)
+
+    //attach listener and create default list item 
+    addListeners()
+    addProjectName();
 }
-
-function deleteInputForm(){
-    const input = document.getElementById("userInput")
-    const btn = document.getElementById("subBtn")
-    btn.remove()
-    input.remove();
-}
-
-
 
 
 function addProjectName(){
+    //get user inputted project name
     const projName = document.getElementById("userInput").value
-    createProject(projName)
+
+    //create default task array and project object
+    let task = createTask("Default Task")
+    let newProject = createProject(projName);
+
+    //create a todollist object with task and project name
+    let listItem = createListItem(projName, task)
+    lists.push(listItem)
+    console.log(lists)
 }
 
-export {addProjectToDOM, inputProjectName, addProjectName,add, deleteInputForm}
+
+
+export {addProjectToDOM, inputProjectName, addProjectName,add}
