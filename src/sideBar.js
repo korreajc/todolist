@@ -1,14 +1,9 @@
-import {createProject, createTask, createListItem} from './project.js'
+import {createProject, createTask, createListItem} from './factoryFunctions.js'
 import {lists} from './array.js'
-import {createContent} from './content.js'
 import {addListeners} from './main.js'
 import {btnMaker, inputForm} from './sharedFunctions.js'
 
-function addProjectToDOM(){
-    const projectList = document.getElementById("projectList")
-    const project = document.getElementById("li")
-    project.innerHTML = "Default"
-}
+
 
 function inputProjectName(){
     inputForm("userInput", "projectList")
@@ -17,7 +12,7 @@ function inputProjectName(){
 
 
 
-function add(){
+function addProjectInputToDom(){
     //grabbing list and user input
     const list = document.getElementById("projectList")
     const input = document.getElementById("userInput").value
@@ -34,11 +29,11 @@ function add(){
 
     //attach listener and create default list item 
     addListeners()
-    addProjectName();
+    addProjectToListArray();
 }
 
 
-function addProjectName(){
+function addProjectToListArray(){
     //get user inputted project name
     const projName = document.getElementById("userInput").value
 
@@ -54,4 +49,4 @@ function addProjectName(){
 
 
 
-export {addProjectToDOM, inputProjectName, addProjectName,add}
+export {inputProjectName, addProjectToListArray,addProjectInputToDom}

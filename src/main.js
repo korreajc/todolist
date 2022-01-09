@@ -1,12 +1,16 @@
 import './styles.css'
-import {inputProjectName} from './sideBar.js'
-import {add} from './sideBar.js'
-import {deleteInputForm} from './sideBar.js'
-import {addTaskList, createContent, deleteContent, displayList} from './content.js'
-import {inputTaskForm} from './content'
-import {addTaskToDOM} from './content'
+import {addProjectInputToDom, inputProjectName} from './sideBar.js'
+import {addTaskListToDOM, createContent, deleteArrayContent, deleteContent, deleteProjects, displayCurrentTaskList, makeProjectList} from './content.js'
+import {inputTaskForm} from './content.js'
+import {addTaskToDOM, addTaskToArray} from './content.js'
 import {deleteForms} from './sharedFunctions.js'
-import {grabCurrentProject, printIndex} from "./content.js"
+import {grabCurrentProjectName} from "./content.js"
+import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPop, populateProjectList} from "./localStorage.js"
+
+(function(){
+    checkStorage();
+}());
+
 
 
 (function (){
@@ -16,21 +20,29 @@ import {grabCurrentProject, printIndex} from "./content.js"
     })
 }());
 
-(function (){
-    const defaultProj = document.getElementById("defaultProject")
-    defaultProj.addEventListener("click", function(){
-        createContent(0)
+
+(function(){
+    document.getElementById("clearBtn").addEventListener("click", function(){
+        window.localStorage.clear();
+        deleteProjects()
         deleteContent()
-        addTaskList()
-        displayList()
+        deleteArrayContent()
+        document.getElementById("mainHeader").innerHTML = ""
+        makeProjectList()
+        addTaskListToDOM()
+        populateProjectList();
+        createContent(0)
+        initialTaskPop()
     })
-}());
+})
+
 
 (function (){
     document.addEventListener("click", function(e){
         if(e.target && e.target.id== 'subBtn'){
-            add();
+            addProjectInputToDom();
             deleteForms("userInput", "subBtn")
+            populateStorage();
         }
     })
     
@@ -49,6 +61,9 @@ import {grabCurrentProject, printIndex} from "./content.js"
     document.addEventListener("click", function(e){
         if(e.target && e.target.id== 'submitTaskBtn'){
             addTaskToDOM()
+            addTaskToArray()
+            deleteForms("taskInput", "submitTaskBtn")
+            populateStorage()
         }
     })
     
@@ -62,12 +77,16 @@ function addListeners(){
             let index = item.getAttribute('data-index')
             deleteContent()
             createContent(index);
-            addTaskList()
-            displayList()
-            grabCurrentProject()
-            printIndex()
+            addTaskListToDOM()
+            displayCurrentTaskList()
+            grabCurrentProjectName()
         })
 };
+
+
+
+
+
 
 export {addListeners}
 

@@ -1,12 +1,4 @@
-let lists = [
-    {
-       projectName: "Default",
-       tasks: [
-           {
-               taskName: "Default Task"
-           }
-        ]
-    }
+let lists = [    
 ];
 
 
