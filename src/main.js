@@ -1,6 +1,6 @@
 import './styles.css'
 import {addProjectInputToDom, inputProjectName} from './sideBar.js'
-import {addTaskListToDOM, createContent, deleteArrayContent, deleteContent, deleteProjects, displayCurrentTaskList, makeProjectList} from './content.js'
+import {addTaskListToDOM, applyStyles, createContent, deleteArrayContent, deleteContent, deleteProjects, displayCurrentTaskList, makeProjectList} from './content.js'
 import {inputTaskForm} from './content.js'
 import {addTaskToDOM, addTaskToArray} from './content.js'
 import {deleteForms} from './sharedFunctions.js'
@@ -41,7 +41,7 @@ import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPo
     document.addEventListener("click", function(e){
         if(e.target && e.target.id== 'subBtn'){
             addProjectInputToDom();
-            deleteForms("userInput", "subBtn")
+            deleteForms("userInput", "subBtn", "forms")
             populateStorage();
         }
     })
@@ -62,7 +62,7 @@ import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPo
         if(e.target && e.target.id== 'submitTaskBtn'){
             addTaskToDOM()
             addTaskToArray()
-            deleteForms("taskInput", "submitTaskBtn")
+            deleteForms("taskInput", "submitTaskBtn", "forms")
             populateStorage()
         }
     })

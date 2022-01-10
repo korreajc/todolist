@@ -1,5 +1,5 @@
 import {lists} from './array.js'
-import { addTaskListToDOM, createContent } from './content.js';
+import { addTaskListToDOM, applyStyles, createContent } from './content.js';
 import { createListItem, createProject, createTask} from './factoryFunctions.js';
 import {addListeners} from './main.js'
 
@@ -17,6 +17,7 @@ function checkStorage(){
         populateProjectList();
         createContent(0)
         initialTaskPop()
+        applyStyles()
         console.log("exists")
     }
 }
@@ -49,6 +50,8 @@ function populateTaskList(){
         const defaultList = document.createElement("li")
         let name = projectList[index].tasks[i]
         defaultList.innerText = name
+        defaultList.classList.add("taskItem")
+
         taskList.appendChild(defaultList)
     }
     
@@ -59,10 +62,11 @@ function initialProjectPop(){
     header.innerText = lists[0].projectName
 
     for(let i = 0; i < lists.length;i++){
-        const defaultList = document.createElement("li")
+        const defaultList = document.createElement("div")
         defaultList.classList.add("listItem")
         let name = lists[i].projectName
         defaultList.innerText = name
+
         projectList.appendChild(defaultList)
         let dataIndex = i;
         defaultList.setAttribute("data-index",dataIndex)
@@ -90,7 +94,7 @@ function populateProjectList(){
     const projectList = document.getElementById("projectList")
 
     for(let i = 0; i < list.length;i++){
-        const defaultList = document.createElement("li")
+        const defaultList = document.createElement("div")
         defaultList.classList.add("listItem")
         let name = list[i].projectName
         defaultList.innerText = name

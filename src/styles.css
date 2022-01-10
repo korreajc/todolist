@@ -1,6 +1,25 @@
 body{
     margin: 0px;
     padding: 0px;
+    font-family: 'Oswald-VariableFont_wght';
+    font-weight:400
+
+}
+
+@font-face {
+    font-family: 'Heebo-VariableFont_wght.ttf';
+    src: url('./heebo/Heebo-VariableFont_wght.ttf');
+    font-weight: 700;
+  }
+@font-face {
+    font-family: 'Oswald-VariableFont_wght';
+    src: url('./Oswald/Oswald-VariableFont_wght.ttf');
+    font-weight: 700;
+  }
+
+#header{
+    border-bottom: 5px solid white;
+
 }
 
 #container{
@@ -19,7 +38,7 @@ body{
 #content{
     width: 100%;
     height: 1400px;
-    background-color: azure;
+    background-color: white;
 }
 
 #top{
@@ -35,16 +54,28 @@ body{
 
 #sideBar{
     height: 1400px;
-    width: 200px;
-    background-color: blue;
+    width: 220px;
+    background-color:black;
    display: flex;
    flex-direction: column;
    gap: 10px;
+   font-size: 20px;
+   color: white;
+   justify-content: left;
 }
 
 #sideBarHeader{
     display: flex;
     gap: 20px;
+    color: white;
+    padding-left: 10px;
+    align-items: center;
+    font-size: 30px;
+}
+
+#projectHeader{
+    border-bottom: 5px solid white;
+
 }
 
 #addProjectButton{
@@ -59,9 +90,127 @@ body{
 header{
     width: 100%;
     height: 100px;
-    background-color: red;
+    font-size: 40px;
+    background-color: black;
     text-align: center;
+    justify-content:right;
     line-height: 100px;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+    color: white;
 
 }
 
+#clearBtn, #addProjectButton{
+    width: auto;
+    height: auto;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+    border: solid white 3px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+    background-color: black;
+    
+}
+
+#taskBtn{
+    background-color: white;
+    border: solid black 3px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+    width: auto;
+    height: auto;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+
+}
+
+.taskItem{
+    width: auto;
+    height: auto;
+    color:white;
+    background-color: black;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.listItem{
+    color: white;
+    background-color: black;
+    width: 150px;
+    height: 35px;
+    border: solid white 3px;
+    border-radius: 5px;    font-size: 15px;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+    align-items: center;
+    text-align: center;
+    line-height: 35px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;}
+
+
+#mainHeader{
+    margin-left: 10px;
+    border-bottom: 5px solid black
+}
+
+ul{
+    list-style-type: none;
+
+}
+
+#btnDiv{
+    display: flex;
+    flex-direction: row;
+    gap: -1px;
+    background-color: black;
+    padding-left: 3px;
+
+}
+
+li::marker{
+    color: black;
+}
+
+li.listItem::marker{
+    color: white;
+
+}
+
+#projectList{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-left: 10px;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+
+}
+#userInput{
+    width: 80px;
+}
+.form{
+    display: flex;
+}
+
+#taskInput{
+    border: solid black 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+    
+    font-family: 'Heebo-VariableFont_wght.ttf';
+
+}
+
+#submitTaskBtn{
+    background-color: white;
+    border: solid black 3px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-left: 5px;
+
+    font-family: 'Heebo-VariableFont_wght.ttf';
+
+}

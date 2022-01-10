@@ -1,6 +1,6 @@
 import {lists, tasks} from './array.js'
 import { createProject, createProjectList, createListItem } from './content.js'
-import { btnMaker, inputForm, deleteForms } from './sharedFunctions.js'
+import { btnMaker, inputForm, deleteForms, btnAndFormMaker } from './sharedFunctions.js'
 import {createTask} from './factoryFunctions.js'
 
 
@@ -9,8 +9,13 @@ function createContent(index){
     let header = lists[index].projectName
     const head = document.getElementById("mainHeader")
     head.innerHTML = header
+}
 
-   
+function applyStyles(){
+    const taskItems = document.querySelectorAll("taskItem")
+    for(let i = 0; i < taskItems.length; i++){
+        taskItems[i].classList.add("taskItem")
+    }
 }
 
 function deleteContent(){
@@ -19,7 +24,7 @@ function deleteContent(){
 }
 
 function makeProjectList(){
-    const projectList = document.createElement("ul")
+    const projectList = document.createElement("div")
     projectList.setAttribute("id", "projectList")
     const main = document.getElementById("sideBar")
     main.appendChild(projectList)
@@ -53,6 +58,8 @@ function displayCurrentTaskList(){
         const defaultList = document.createElement("li")
         let name = projectList[index].tasks[i].taskName
         defaultList.innerText = name
+        defaultList.classList.add("taskItem")
+
         taskList.appendChild(defaultList)
     }
 }
@@ -78,8 +85,8 @@ function getCurrentArrayIndex(){
 }
 
 function inputTaskForm(){
-    inputForm("taskInput", "taskList")
-    btnMaker("submitTaskBtn", "taskList")
+    
+    btnAndFormMaker("submitTaskBtn","taskInput", "taskList")
 }
 
 function addTaskToDOM(){
@@ -101,4 +108,4 @@ function addTaskToArray(){
 
 
 
-export {deleteArrayContent, createContent, makeProjectList, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, grabCurrentProjectName, deleteProjects}
+export {applyStyles, deleteArrayContent, createContent, makeProjectList, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, grabCurrentProjectName, deleteProjects}

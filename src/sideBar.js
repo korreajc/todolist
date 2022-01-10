@@ -1,13 +1,12 @@
 import {createProject, createTask, createListItem} from './factoryFunctions.js'
 import {lists} from './array.js'
 import {addListeners} from './main.js'
-import {btnMaker, inputForm} from './sharedFunctions.js'
+import {btnAndFormMaker, btnMaker, inputForm} from './sharedFunctions.js'
 
 
 
 function inputProjectName(){
-    inputForm("userInput", "projectList")
-    btnMaker("subBtn", "projectList");
+    btnAndFormMaker("subBtn", "userInput", "projectList")
 }
 
 
@@ -18,7 +17,7 @@ function addProjectInputToDom(){
     const input = document.getElementById("userInput").value
 
     //creating li and adding attributes and input to it
-    const newProj = document.createElement("li")
+    const newProj = document.createElement("div")
     newProj.classList.add("listItem")
     newProj.innerHTML = input;
     let dataIndex = lists.length;
