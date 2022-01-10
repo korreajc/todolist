@@ -3,7 +3,7 @@ import {addProjectInputToDom, inputProjectName} from './sideBar.js'
 import {addTaskListToDOM, applyStyles, createContent, deleteArrayContent, deleteContent, deleteProjects, displayCurrentTaskList, makeProjectList} from './content.js'
 import {inputTaskForm} from './content.js'
 import {addTaskToDOM, addTaskToArray} from './content.js'
-import {deleteForms} from './sharedFunctions.js'
+import {deleteForms, taskInputForm} from './sharedFunctions.js'
 import {grabCurrentProjectName} from "./content.js"
 import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPop, populateProjectList} from "./localStorage.js"
 
@@ -41,7 +41,7 @@ import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPo
     document.addEventListener("click", function(e){
         if(e.target && e.target.id== 'subBtn'){
             addProjectInputToDom();
-            deleteForms("userInput", "subBtn", "forms")
+            deleteForms("forms")
             populateStorage();
         }
     })
@@ -51,7 +51,7 @@ import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPo
 (function (){
     document.addEventListener("click", function(e){
         if(e.target && e.target.id== 'taskBtn'){
-            inputTaskForm();
+            taskInputForm("userInput", "monthInput", "dayInput", "yearInput",  "taskList", "submitTaskBtn")
         }
     })
     
@@ -62,7 +62,7 @@ import {checkStorage, populateStorage, returnList, setNewStorage,  initialTaskPo
         if(e.target && e.target.id== 'submitTaskBtn'){
             addTaskToDOM()
             addTaskToArray()
-            deleteForms("taskInput", "submitTaskBtn", "forms")
+            deleteForms("forms")
             populateStorage()
         }
     })

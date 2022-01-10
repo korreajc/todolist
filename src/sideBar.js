@@ -37,9 +37,7 @@ function addProjectToListArray(){
     const projName = document.getElementById("userInput").value
 
     //create default task array and project object
-    let task = createTask("Default Task")
-    let newProject = createProject(projName);
-
+    let task = createTask("Default Task", "01/01/2022")
     //create a todollist object with task and project name
     let listItem = createListItem(projName, task)
     lists.push(listItem)

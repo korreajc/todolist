@@ -6,9 +6,10 @@ function createProject(projectName){
     }
 }
 
-function createTask(taskName){
+function createTask(taskName, taskDate){
     return{
         taskName: taskName,
+        taskDate: taskDate
     }
 }
 

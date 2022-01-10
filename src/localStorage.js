@@ -17,13 +17,13 @@ function checkStorage(){
         populateProjectList();
         createContent(0)
         initialTaskPop()
-        applyStyles()
         console.log("exists")
     }
 }
 
 function setNewStorage(){
-    const firstTask = createTask("Default Task")
+    const firstTask = createTask("Default Task", "01/01/2022")
+    console.log("created")
     const defaultProject = createListItem("Default Project", firstTask)
     lists.push(defaultProject);
     window.localStorage.setItem('list', JSON.stringify(lists))
@@ -47,12 +47,21 @@ function populateTaskList(){
     const taskList = document.getElementById("taskList")
 
     for(let i = 0; i < projectList[index].tasks.length;i++){
-        const defaultList = document.createElement("li")
-        let name = projectList[index].tasks[i]
-        defaultList.innerText = name
-        defaultList.classList.add("taskItem")
+        
 
-        taskList.appendChild(defaultList)
+
+    const newTaskWrapper = document.createElement("div")
+    const newTaskName = document.createElement("div")
+    const newTaskDate = document.createElement("div")
+    const date = createDateString()
+
+    newTaskName.innerText = projectList[index].tasks[i].taskName
+    newTaskDate.innerText = projectList[index].tasks[i].taskDate
+
+    newTaskWrapper.classList.add("taskItem")
+    newTaskWrapper.appendChild(newTaskName)
+    newTaskWrapper.appendChild(newTaskDate)    
+    taskList.appendChild(newTaskWrapper);
     }
     
 }
@@ -78,14 +87,20 @@ function initialProjectPop(){
 }
 
 function initialTaskPop(){
+    console.log(lists)
+
     for(let i = 0; i < lists[0].tasks.length;i++){
-        const defaultList = document.createElement("li")
-        defaultList.classList.add("taskItem")
-        let name = lists[0].tasks[i].taskName
-        defaultList.innerText = name
-        taskList.appendChild(defaultList)
-        let dataIndex = i;
-        defaultList.setAttribute("data-index",dataIndex)
+        const newTaskWrapper = document.createElement("div")
+        const newTaskName = document.createElement("div")
+        const newTaskDate = document.createElement("div")
+
+        newTaskName.innerText = lists[0].tasks[i].taskName
+        newTaskDate.innerText = lists[0].tasks[i].taskDate
+
+        newTaskWrapper.classList.add("taskItem")
+        newTaskWrapper.appendChild(newTaskName)
+        newTaskWrapper.appendChild(newTaskDate)    
+        taskList.appendChild(newTaskWrapper);
 }
 
 }

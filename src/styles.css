@@ -195,11 +195,19 @@ li.listItem::marker{
     display: flex;
 }
 
+#forms{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+
 #taskInput{
     border: solid black 3px;
     border-radius: 5px;
     margin-left: 10px;
-    
+    align-items: center;
     font-family: 'Heebo-VariableFont_wght.ttf';
 
 }
@@ -213,4 +221,12 @@ li.listItem::marker{
 
     font-family: 'Heebo-VariableFont_wght.ttf';
 
+}
+
+#monthInput, #dayInput{
+    width: 25px;
+}
+
+#yearInput{
+    width: 35px;
 }
