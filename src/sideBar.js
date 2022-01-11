@@ -14,22 +14,33 @@ function inputProjectName(){
 function addProjectInputToDom(){
     //grabbing list and user input
     const list = document.getElementById("projectList")
+    const wrapper = document.createElement("div")
     const input = document.getElementById("userInput").value
+    const deleteProjectBtn = document.createElement("button")
+    deleteProjectBtn.classList.add("deleteProjBtn")
 
     //creating li and adding attributes and input to it
     const newProj = document.createElement("div")
     newProj.classList.add("listItem")
     newProj.innerHTML = input;
+    deleteProjectBtn.innerText = "X"
     let dataIndex = lists.length;
     newProj.setAttribute("data-index",dataIndex)
+    deleteProjectBtn.setAttribute("data-index", dataIndex)
+
     
+    wrapper.classList.add("projectWrapper")
+    wrapper.appendChild(newProj)
+    wrapper.appendChild(deleteProjectBtn)
     //appends to dom
-    list.appendChild(newProj)
+    list.appendChild(wrapper)
 
     //attach listener and create default list item 
     addListeners()
     addProjectToListArray();
 }
+
+
 
 
 function addProjectToListArray(){

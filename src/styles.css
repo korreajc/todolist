@@ -54,7 +54,7 @@ body{
 
 #sideBar{
     height: 1400px;
-    width: 220px;
+    width: 300px;
     background-color:black;
    display: flex;
    flex-direction: column;
@@ -229,4 +229,22 @@ li.listItem::marker{
 
 #yearInput{
     width: 35px;
+}
+
+.projectWrapper{
+    display: flex;
+    gap: 10px;
+}
+
+.deleteProjBtn{
+    width: 41px;
+    height: 41px;
+    font-family: 'Heebo-VariableFont_wght.ttf';
+    font-size: 30px;
+    text-align: center;
+    line-height: 37px;
+    color: red;
+    background-color: black;
+    border: solid red 3px;
+    border-radius: 10px;
 }

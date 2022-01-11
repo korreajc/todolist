@@ -34,6 +34,17 @@ function populateStorage(){
     console.log("addedhh")
 }
 
+function updateIndex(){
+    for(let i = 0; i < lists.length; i++){
+        let list = document.querySelectorAll(".listItem")
+        let buttonList = document.querySelectorAll(".deleteProjBtn")
+
+        list[i].setAttribute("data-index", i)
+        buttonList[i].setAttribute("data-index", i)
+
+    }
+}
+
 function returnList(){
     let temp = JSON.parse(localStorage.getItem('list'))
     for(let i = 0; i < temp.length; i++){
@@ -47,39 +58,52 @@ function populateTaskList(){
     const taskList = document.getElementById("taskList")
 
     for(let i = 0; i < projectList[index].tasks.length;i++){
-        
+    
+        const newTaskWrapper = document.createElement("div")
+        const newTaskName = document.createElement("div")
+        const newTaskDate = document.createElement("div")
+        const date = createDateString()
 
+        newTaskName.innerText = projectList[index].tasks[i].taskName
+        newTaskDate.innerText = projectList[index].tasks[i].taskDate
 
-    const newTaskWrapper = document.createElement("div")
-    const newTaskName = document.createElement("div")
-    const newTaskDate = document.createElement("div")
-    const date = createDateString()
-
-    newTaskName.innerText = projectList[index].tasks[i].taskName
-    newTaskDate.innerText = projectList[index].tasks[i].taskDate
-
-    newTaskWrapper.classList.add("taskItem")
-    newTaskWrapper.appendChild(newTaskName)
-    newTaskWrapper.appendChild(newTaskDate)    
-    taskList.appendChild(newTaskWrapper);
+        newTaskWrapper.classList.add("taskItem")
+        newTaskWrapper.appendChild(newTaskName)
+        newTaskWrapper.appendChild(newTaskDate)    
+        taskList.appendChild(newTaskWrapper);
     }
     
 }
 function initialProjectPop(){
+    console.log("pop")
+
     const projectList = document.getElementById("projectList")
     const header = document.getElementById("mainHeader")
     header.innerText = lists[0].projectName
+    let wrapperList = document.querySelectorAll(".projectWrapper")
 
-    for(let i = 0; i < lists.length;i++){
+
+    if(wrapperList.length == 0){
+            const wrapper = document.createElement("div")
+        const deleteProjectBtn = document.createElement("button")
         const defaultList = document.createElement("div")
-        defaultList.classList.add("listItem")
-        let name = lists[i].projectName
-        defaultList.innerText = name
 
-        projectList.appendChild(defaultList)
-        let dataIndex = i;
-        defaultList.setAttribute("data-index",dataIndex)
-        addListeners(i)
+        defaultList.classList.add("listItem")
+        deleteProjectBtn.classList.add("deleteProjBtn")
+        wrapper.classList.add("projectWrapper")
+        let name = lists[0].projectName
+        defaultList.innerText = name
+        deleteProjectBtn.innerText = "X"
+
+        wrapper.appendChild(defaultList)
+        wrapper.appendChild(deleteProjectBtn)
+        projectList.appendChild(wrapper)
+
+        let dataIndex = 0;
+        defaultList.setAttribute("data-index", dataIndex)
+        deleteProjectBtn.setAttribute("data-index", dataIndex)
+        addListeners(0)
+
         const taskList = document.getElementById("taskList")
 
         
@@ -97,6 +121,7 @@ function initialTaskPop(){
         newTaskName.innerText = lists[0].tasks[i].taskName
         newTaskDate.innerText = lists[0].tasks[i].taskDate
 
+
         newTaskWrapper.classList.add("taskItem")
         newTaskWrapper.appendChild(newTaskName)
         newTaskWrapper.appendChild(newTaskDate)    
@@ -109,17 +134,30 @@ function populateProjectList(){
     const projectList = document.getElementById("projectList")
 
     for(let i = 0; i < list.length;i++){
+        const wrapper = document.createElement("div")
+        const deleteProjectBtn = document.createElement("button")
         const defaultList = document.createElement("div")
+
+
+        deleteProjectBtn.classList.add("deleteProjBtn")
+        wrapper.classList.add("projectWrapper")
         defaultList.classList.add("listItem")
+
         let name = list[i].projectName
         defaultList.innerText = name
-        projectList.appendChild(defaultList)
+        deleteProjectBtn.innerText = "X"
+
+        wrapper.appendChild(defaultList)
+        wrapper.appendChild(deleteProjectBtn)
+        projectList.appendChild(wrapper)
+
         let dataIndex = i;
         defaultList.setAttribute("data-index",dataIndex)
+        deleteProjectBtn.setAttribute("data-index", dataIndex)
         addListeners(i)
     }
 }
 
 
 
-export {setNewStorage, checkStorage, populateStorage, returnList, populateTaskList, populateProjectList, initialTaskPop}
+export {updateIndex, setNewStorage, checkStorage, populateStorage, returnList, populateTaskList, populateProjectList, initialTaskPop, initialProjectPop}

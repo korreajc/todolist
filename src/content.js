@@ -133,6 +133,23 @@ function addTaskToArray(){
     console.log(newTask)
 }
 
+function updateContent(i){
+    const header = document.getElementById("mainHeader")
+    header.innerHTML = " "
+    const taskList = document.getElementById("taskList")
+    taskList.remove();
+    if(i == 0){
+        createContent(0);
+        addTaskListToDOM()
+        displayCurrentTaskList()
+    }else if(i > 0){
+        let tempIndex = i-1
+        createContent(tempIndex)
+        addTaskListToDOM()
+        displayCurrentTaskList()
+    }
+}
 
 
-export { deleteArrayContent, createContent, makeProjectList, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, grabCurrentProjectName, deleteProjects}
+
+export { updateContent, deleteArrayContent, createContent, makeProjectList, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, grabCurrentProjectName, deleteProjects}
