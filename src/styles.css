@@ -130,7 +130,7 @@ header{
     width: auto;
     height: auto;
     color:white;
-    background-color: black;
+    background-color: red;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
@@ -247,4 +247,14 @@ li.listItem::marker{
     background-color: black;
     border: solid red 3px;
     border-radius: 10px;
+}
+
+.turnGreen{
+
+}
+
+.checkBoxDiv{
+    background-color: blue;
+    width: 20px;
+    height: 20px;
 }

@@ -1,6 +1,5 @@
-import {lists, tasks} from './array.js'
-import { createProject, createProjectList, createListItem } from './content.js'
-import { btnMaker, inputForm, deleteForms, btnAndFormMaker } from './sharedFunctions.js'
+import {lists} from './array.js'
+import { btnAndFormMaker , makeTask, getCurrentArrayIndex, createDateString} from './sharedFunctions.js'
 import {createTask} from './factoryFunctions.js'
 import { format } from 'date-fns'
 
@@ -18,13 +17,7 @@ function deleteContent(){
    taskList.remove();
 }
 
-//appends a parent div of project to the DOM
-function makeProjectList(){
-    const projectList = document.createElement("div")
-    projectList.setAttribute("id", "projectList")
-    const main = document.getElementById("sideBar")
-    main.appendChild(projectList)
-}
+
 
 //clears temp array
 function deleteArrayContent(){
@@ -47,47 +40,14 @@ function addTaskListToDOM(){
 
 //displays task list of current project
 function displayCurrentTaskList(){
-    
     let index = getCurrentArrayIndex();
     const projectList = JSON.parse(window.localStorage.getItem('list'))
-
     for(let i = 0; i < projectList[index].tasks.length;i++){
-        const taskList = document.getElementById("taskList")
-        const newTaskWrapper = document.createElement("div")
-        const newTaskName = document.createElement("div")
-        const newTaskDate = document.createElement("div")
-        
-        newTaskName.innerText = projectList[index].tasks[i].taskName
-        newTaskDate.innerText = projectList[index].tasks[i].taskDate
-       
-        newTaskWrapper.classList.add("taskItem")
-        newTaskWrapper.appendChild(newTaskName)
-        newTaskWrapper.appendChild(newTaskDate)    
-        taskList.appendChild(newTaskWrapper);
+        makeTask(projectList[index].tasks[i].taskName, projectList[index].tasks[i].taskDate)
     }
 }
 
 //grabs header name
-function grabCurrentProjectName(){
-    const currentProject = document.getElementById("mainHeader")
-    let headerName = currentProject.innerHTML
-    return headerName;
-}
-//helps figure out what project index we clicked on
-
-function getCurrentArrayIndex(){
-    let headerName = grabCurrentProjectName();
-    const projectList = JSON.parse(window.localStorage.getItem('list'))
-
-    let index = 0;
-    for(let i = 0; i < projectList.length; i++){
-        let currName = projectList[i].projectName
-        if(currName == headerName){
-            index = i;
-        }
-    }
-    return index
-}
 
 //makes input
 function inputTaskForm(){
@@ -96,30 +56,10 @@ function inputTaskForm(){
 
 //adds single task to dom for first time
 function addTaskToDOM(){
-    const taskList = document.getElementById("taskList")
-    const newTaskWrapper = document.createElement("div")
-    const newTaskName = document.createElement("div")
-    const newTaskDate = document.createElement("div")
     const date = createDateString()
-    console.log(date)
-    newTaskName.innerText = document.getElementById("userInput").value
-    newTaskDate.innerText = date
-
-    newTaskWrapper.classList.add("taskItem")
-    newTaskWrapper.appendChild(newTaskName)
-    newTaskWrapper.appendChild(newTaskDate)    
-    taskList.appendChild(newTaskWrapper);
+    makeTask(document.getElementById("userInput").value, date)
 }
 
-function createDateString(){
-    const monthInput = document.getElementById("monthInput").value
-    const dayInput = document.getElementById("dayInput").value
-    const yearInput = document.getElementById("yearInput").value
-    console.log(yearInput)
-    var result = format(new Date(yearInput, monthInput, dayInput), 'MM/dd/yyyy')
-    console.log(result)
-    return result
-}
 
 //adds task to proper todo list
 function addTaskToArray(){
@@ -133,23 +73,24 @@ function addTaskToArray(){
     console.log(newTask)
 }
 
-function updateContent(i){
-    const header = document.getElementById("mainHeader")
-    header.innerHTML = " "
+function populateTaskList(){
+    const projectList = JSON.parse(window.localStorage.getItem('list'))
     const taskList = document.getElementById("taskList")
-    taskList.remove();
-    if(i == 0){
-        createContent(0);
-        addTaskListToDOM()
-        displayCurrentTaskList()
-    }else if(i > 0){
-        let tempIndex = i-1
-        createContent(tempIndex)
-        addTaskListToDOM()
-        displayCurrentTaskList()
+    for(let i = 0; i < projectList[index].tasks.length;i++){
+        makeTask(projectList[index].tasks[i].taskName, projectList[index].tasks[i].taskDate)  
+    }
+    
+}
+
+
+function initialTaskPop(){
+    console.log(lists)
+    for(let i = 0; i < lists[0].tasks.length;i++){
+        makeTask(lists[0].tasks[i].taskName, lists[0].tasks[i].taskDate)
     }
 }
 
 
 
-export { updateContent, deleteArrayContent, createContent, makeProjectList, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, grabCurrentProjectName, deleteProjects}
+
+export { deleteArrayContent, createContent, inputTaskForm, deleteContent, addTaskListToDOM, addTaskToDOM, addTaskToArray, displayCurrentTaskList, deleteProjects, populateTaskList, initialTaskPop}
